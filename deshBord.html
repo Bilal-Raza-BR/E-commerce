@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="deshBord.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <svg onclick="toggle()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></svg>  <div class="user-info">
+            <span>Welcome</span>
+            <img src="./1729750011616.jpg" width="50px"  height="50px" walt="User Avatar">
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <ul>
+                <li><a href="./index.html">HomePage</a></li>
+                <li><a href="./singup.html">Singup</a></li>
+                <li><a href="./login.html">Login</a></li>
+                <li><a href="#">Log Out</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Dashboard</h1>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody id="Table">
+                    
+                </tbody>
+            </table>
+        </main>
+
+    </div>
+
+    <script>
+var table = document.getElementById('Table');
+var getData = window.localStorage.getItem("userdata");
+var getParseData = JSON.parse(getData);
+
+console.log(getParseData)
+for (var i = 0; i < getParseData.length; i++) {
+    table.innerHTML += `
+        <tr>
+          <td>${getParseData[i].firstName}</td>
+          <td>${getParseData[i].lastName}</td>
+          <td>${getParseData[i].phone}</td>
+          <td>${getParseData[i].email}</td>
+          <td>${getParseData[i].password}</td>
+          <td><button onclick="deleteUser(this)">Delete</button></td>
+        </tr>
+      `;
+    }
+    function deleteUser(e){
+  e.parentNode.parentNode.remove()
+}
+
+function toggle() {
+      var toggle = document.getElementById('sidebar');
+      if (toggle.style.display == "none") {
+        toggle.style.display = "block"
+      } else {
+        toggle.style.display = "none"
+      }
+    }
+
+    </script>
+</body>
+</html>
