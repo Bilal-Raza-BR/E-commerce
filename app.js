@@ -4,18 +4,24 @@
 var userdata = JSON.parse(window.localStorage.getItem('userdata') || '[]');
 
 function signup() {
-  var firstName = document.getElementById('firstName').value.trim();
-  var lastName = document.getElementById('lastName').value.trim();
-  var email = document.getElementById('email').value.trim();
-  var phone = document.getElementById('phone').value.trim();
-  var password = document.getElementById('password').value.trim();
-
+  var firstName = document.getElementById('firstName').value;
+  var lastName = document.getElementById('lastName').value;
+  var email = document.getElementById('email').value;
+  var phone = document.getElementById('phone').value;
+  var password = document.getElementById('password').value;
+  
+  if ( email === "admin@gmail.com")  {
+    alert("This Email Already Singup");
+    
+  }
+  else{
   if (firstName === "" || lastName === "" || email === "" || phone === "" || password === "") {
     alert("Please insert the value in all fields");
   } else {
     var emailExist = false;
     for (var j = 0; j < userdata.length; j++) {
-      if (email === userdata[j].email) {
+      console.log("hello")
+      if ( email === userdata[j].email)  {
         alert("This Email Already Singup");
         emailExist = true;
         break;
@@ -36,6 +42,7 @@ function signup() {
     }
   }
 }
+}
 
 function logIn() {
     var lEmail = document.getElementById('lemail').value;
@@ -52,7 +59,7 @@ function logIn() {
         if (lEmail === getParseData[k].email && getParseData[k].password === lPassword) {
           login = true;
           window.localStorage.setItem("currentUser", JSON.stringify(getParseData[k]));
-          window.location.href = "index.html"
+          window.location.href = "home.html"
           break;
         }
       }

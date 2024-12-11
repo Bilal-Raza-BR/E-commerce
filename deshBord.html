@@ -21,8 +21,8 @@
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <ul>
-                <li><a href="./index.html">HomePage</a></li>
-                <li><a href="./singup.html">Singup</a></li>
+                <li><a href="./home.html">HomePage</a></li>
+                <li><a href="./index.html">Singup</a></li>
                 <li><a href="./login.html">Login</a></li>
                 <li><a href="#">Log Out</a></li>
             </ul>
@@ -39,6 +39,7 @@
                         <th>Contact</th>
                         <th>Email</th>
                         <th>Password</th>
+                        
                         <th>Update</th>
                     </tr>
                 </thead>
@@ -64,12 +65,36 @@ for (var i = 0; i < getParseData.length; i++) {
           <td>${getParseData[i].phone}</td>
           <td>${getParseData[i].email}</td>
           <td>${getParseData[i].password}</td>
+          
           <td><button onclick="deleteUser(this)">Delete</button></td>
         </tr>
       `;
     }
     function deleteUser(e){
+//   e.parentNode.parentNode.remove()
+var cheak = e.parentNode.parentNode.childNodes[7].textContent
+console.log(cheak)
+//   var idNode = e.parentNode.parentNode.[2].textContent;
+//   console.log(idNode);
+
+  for (var a = 0; a < getParseData.length; a++) {
+    if (cheak == getParseData[a].email) {
+
+getParseData.splice(a, 1)
+localStorage.setItem("userdata", JSON.stringify(getParseData));
+
+    //   for (var b = 0; b < getParseData[a].CardId.length; b++) {
+    //     if (idNode == getParseData[a].CardId[b].id) {
+    //      var getCardId = getParseData[a].CardId
+    //      getCardId.splice(b, 1)
+    //      localStorage.setItem("userdata", JSON.stringify(getParseData));
+
+    //     }
+    //   }
+    }
+  }
   e.parentNode.parentNode.remove()
+
 }
 
 function toggle() {

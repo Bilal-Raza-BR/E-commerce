@@ -1,5 +1,6 @@
 // Card Work Is Here 
 
+var Product = JSON.parse(window.localStorage.getItem('itemsData') || '[]');
 var itemsData = [
     {
         id: 1,
@@ -107,17 +108,8 @@ var itemsData = [
         image: "https://img.drz.lazcdn.com/static/pk/p/2c445ac12f16492b1f977d2bf2e8c060.jpg_960x960q80.jpg_.webp",
         price: "3000"
     }
-    ,
-    {
-        id: 12,
-        Name: "Shoes",
-        size: "Small , Medium ,Large",
-        color: "Black , Nevy Blue , white",
-        image: "https://img.drz.lazcdn.com/static/pk/p/2c445ac12f16492b1f977d2bf2e8c060.jpg_960x960q80.jpg_.webp",
-        price: "3000"
-    }
+   
 ]
-
 
 
 
@@ -147,26 +139,48 @@ var getData = window.localStorage.getItem("userdata");
 var getParseData = JSON.parse(getData);
 console.log(itemsData[0].id)
 
+
+var hadding = document.getElementById('UserName');
+
+hadding.innerHTML = currentUser.firstName +" "+currentUser.lastName 
+
+
+
+var rafOrder = JSON.parse(window.localStorage.getItem('PrintOrder') || '[]');
+// window.localStorage.setItem("PrintOrder",JSON.stringify(rafOrder))
+
 function add(e) {
-    var idNode = e.parentNode.childNodes[2].textContent;
-    console.log(idNode);
-    for (var a = 0; a < itemsData.length; a++) {
-        if (idNode == itemsData[a].id) {
-          console.log("hellow")
-        for (var b = 0; b < getParseData.length; b++) {
-          if (currentUser.email == getParseData[b].email) {
-            if (!getParseData[b].CardId) {
-              getParseData[b].CardId = [];
-            }
-            getParseData[b].CardId.push(itemsData[a]);
-            window.localStorage.setItem("userdata", JSON.stringify(getParseData));
-          }
-        }
-      }
+  var idNode = e.parentNode.childNodes[2].textContent;
+  console.log(idNode);
+  for (var a = 0; a < itemsData.length; a++) {
+    if (idNode == itemsData[a].id) {
+      rafOrder.push(itemsData[a])
+      window.localStorage.setItem("PrintOrder",JSON.stringify(rafOrder))
+      console.log(rafOrder)
     }
-    alert("✅Order Submit")
   }
+  alert("Add To Cart✅")
+}
+
+
+
+// function add(e) {
+//     var idNode = e.parentNode.childNodes[2].textContent;
+//     console.log(idNode);
+//     for (var a = 0; a < itemsData.length; a++) {
+//         if (idNode == itemsData[a].id) {
+//           console.log("hellow")
+//         for (var b = 0; b < getParseData.length; b++) {
+//           if (currentUser.email == getParseData[b].email) {
+//             if (!getParseData[b].CardId) {
+//               getParseData[b].CardId = [];
+//             }
+//             getParseData[b].CardId.push(itemsData[a]);
+//             window.localStorage.setItem("userdata", JSON.stringify(getParseData));
+//           }
+//         }
+//       }
+//     }
+//     alert("✅Order Submit")
+//   }
   
-
-
-
