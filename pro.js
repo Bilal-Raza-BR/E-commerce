@@ -14,6 +14,7 @@ var cardArea = document.getElementById("cardArea")
 for(var x = 0; x<getParseData.length;x++){
  if (getOrder.length == 0){
 cardArea.innerHTML = `<h2>Empty<h2>`
+document.getElementById("order").style.display="none"
   }
 }
 // console.log(getParseData[1].CardId)
@@ -68,6 +69,7 @@ function order() {
         console.log(getOrder[l])
       }
       getOrder.splice(0)
+      console.log("hello")
       window.localStorage.setItem("PrintOrder", JSON.stringify(getOrder));
       window.localStorage.setItem("userdata", JSON.stringify(getParseData));
       alert("✅Order Submit")
@@ -114,6 +116,7 @@ function remove(e) {
 
           if(getOrder.length == 0){
              cardArea.innerHTML = `<h2>Empty<h2>`
+             document.getElementById("order").style.display="none"
            }
         }
       }
