@@ -24,39 +24,68 @@
                 <li><a href="./home.html">HomePage</a></li>
                 <li><a href="./index.html">Singup</a></li>
                 <li><a href="./login.html">Login</a></li>
-                <li><a href="#">Log Out</a></li>
+                <li><a href="#" onclick="users()">User Data</a></li>
+                <li><a href="#" onclick="orderList()">Order List</a></li>
+                <li><a href="./index.html">Log Out</a></li>
             </ul>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
-            <h1>Dashboard</h1>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Contact</th>
-                        <th>Email</th>
-                        <th>Password</th>
+            <div id="userList">
+
+                <h1>User Data</h1>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Contact</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            
+                            <th>Update</th>
+                        </tr>
+                    </thead>
+                    <tbody id="Table">
                         
-                        <th>Update</th>
-                    </tr>
-                </thead>
-                <tbody id="Table">
-                    
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
+            <div id="orderList">
+                <h1>Order List</h1>
+                <table  class="data-table">
+                    <thead>
+
+
+                        <tr>
+                            <th>ID No</th>
+                            <th>Product</th>
+                            <th>Colors</th>
+                            <th>Sizes</th>
+                            <th>Price</th>
+                            <th>Update</th>
+                        </tr>
+                        
+                    </thead>
+                    <tbody id="ordershow">
+
+                    </tbody>
+
+                </table>
+            </div>
+            
         </main>
 
     </div>
 
-    <script>
+    <script >
+        console.log("hellow")
+
 var table = document.getElementById('Table');
 var getData = window.localStorage.getItem("userdata");
 var getParseData = JSON.parse(getData);
 
-console.log(getParseData)
 for (var i = 0; i < getParseData.length; i++) {
     table.innerHTML += `
         <tr>
@@ -70,10 +99,42 @@ for (var i = 0; i < getParseData.length; i++) {
         </tr>
       `;
     }
+
+
+function toggle() {
+      var toggle = document.getElementById('sidebar');
+      if (toggle.style.display == "none") {
+        toggle.style.display = "block"
+      } else {
+        toggle.style.display = "none"
+      }
+    }
+
+    var orderTable = document.getElementById("ordershow")
+    var getOrder = JSON.parse(window.localStorage.getItem('orderList'))
+// console.log(getOrder[0].Name);
+
+for(var q = 0; q < getOrder.length ; q++){
+        console.log("Hellow")
+        orderTable.innerHTML += `
+        <tr>
+    <td>${getOrder[q].id}</td>
+    <td>${getOrder[q].Name}</td>
+    <td>${getOrder[q].color}</td>
+    <td>${getOrder[q].size}</td>
+    <td>${getOrder[q].price}</td>
+    <td><button onclick="deleteUser(this)">Delete</button></td>
+</tr>
+
+        `
+
+
+    }
     function deleteUser(e){
 //   e.parentNode.parentNode.remove()
-var cheak = e.parentNode.parentNode.childNodes[7].textContent
-console.log(cheak)
+var cheak = e.parentNode.parentNode.childNodes[7].textContent;
+var cheak2 = e.parentNode.parentNode.childNodes[1].textContent
+console.log(cheak2)
 //   var idNode = e.parentNode.parentNode.[2].textContent;
 //   console.log(idNode);
 
@@ -92,20 +153,37 @@ localStorage.setItem("userdata", JSON.stringify(getParseData));
     //     }
     //   }
     }
+    console.log(e.parentNode.parentNode.remove());
+    if (cheak2 == getOrder[a].id) {
+
+getOrder.splice(a, 1)
+localStorage.setItem("orderList", JSON.stringify(getOrder));
+
+    //   for (var b = 0; b < getParseData[a].CardId.length; b++) {
+    //     if (idNode == getParseData[a].CardId[b].id) {
+    //      var getCardId = getParseData[a].CardId
+    //      getCardId.splice(b, 1)
+    //      localStorage.setItem("userdata", JSON.stringify(getParseData));
+
+    //     }
+    //   }
+    }
   }
+  
   e.parentNode.parentNode.remove()
 
 }
-
-function toggle() {
-      var toggle = document.getElementById('sidebar');
-      if (toggle.style.display == "none") {
-        toggle.style.display = "block"
-      } else {
-        toggle.style.display = "none"
-      }
-    }
-
-    </script>
+function orderList(){
+    document.getElementById("orderList").style.display ="block";
+    document.getElementById("userList").style.display ="none";
+    
+}
+function users(){
+    document.getElementById("orderList").style.display ="none";
+    document.getElementById("userList").style.display ="block";
+    
+}
+</script>
+    
 </body>
 </html>

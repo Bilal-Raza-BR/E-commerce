@@ -56,8 +56,15 @@ document.getElementById("order").style.display="none"
 //     }
 //   }
 // }
+ var orderList = JSON.parse(window.localStorage.getItem('orderList') || '[]');
 
 function order() {
+  console.log(getOrder);
+  
+  for(var o =0; o< getOrder.length;o++){
+   orderList.push(getOrder[o]) 
+   window.localStorage.setItem("orderList", JSON.stringify(orderList));
+  }
   for (var p = 0; p < getParseData.length; p++) {
     if (currentUser.email == getParseData[p].email) {
       if (!getParseData[p].CardId) {
@@ -72,6 +79,7 @@ function order() {
       console.log("hello")
       window.localStorage.setItem("PrintOrder", JSON.stringify(getOrder));
       window.localStorage.setItem("userdata", JSON.stringify(getParseData));
+
       alert("✅Order Submit")
     }
   }
